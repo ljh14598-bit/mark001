@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>mark yay | Premium Match Picks</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Rajdhani:wght@600;700&family=Teko:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           BASE RESET & DARK MAGIC VIP THEME (基于代码原版进步001)
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #09050E; /* Midnight purple-black */
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        /* Ambient Radial Glow */
+        .ambient-glow {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 900px;
+            background: radial-gradient(ellipse at 50% 10%, rgba(157, 0, 255, 0.25) 0%, rgba(9, 5, 14, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Canvas Background */
+        #magicCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ==========================================================================
+           CSS GOLDEN SHOOTING STARS
+           ========================================================================== */
+        .shooting-star {
+            position: fixed;
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 1), rgba(255, 215, 0, 0));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8));
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .star-1 { top: 10%; right: 10%; animation: shoot 6s linear infinite; animation-delay: 1s; }
+        .star-2 { top: 30%; right: 0%; animation: shoot 8s linear infinite; animation-delay: 4s; }
+        .star-3 { top: 0%; right: 40%; animation: shoot 10s linear infinite; animation-delay: 7s; }
+
+        @keyframes shoot {
+            0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
+            100% { transform: translateX(-1500px) translateY(1500px) rotate(-45deg); opacity: 0; }
+        }
+
+        /* ==========================================================================
+           STRICT CENTERING LAYOUT
+           ========================================================================== */
+        .outmost-wrapper {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            max-width: 1200px;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ==========================================================================
+           HEADER, LOGO & MAGIC DIVIDER
+           ========================================================================== */
+        .brand-logo {
+            display: block;
+            margin: 0 auto 15px auto;
+            max-width: 160px;
+            mix-blend-mode: screen;
+            filter: contrast(1.2);
+            border-radius: 8px;
+        }
+
+        .brand-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #FFFFFF;
+            line-height: 1;
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(178, 0, 255, 0.8), 0 0 40px rgba(157, 0, 255, 0.5);
+        }
+
+        /* Customer Support Link */
+        .support-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            color: #39FF14;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid rgba(57, 255, 20, 0.4);
+            padding: 6px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.1);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .support-link:hover {
+            background: rgba(57, 255, 20, 0.15);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+            color: #FFFFFF;
+            border-color: #39FF14;
+        }
+
+        /* Magic Drawn Line */
+        .magic-divider {
+            position: relative;
+            height: 3px;
+            width: 200px;
+            margin: 0 auto 25px auto;
+            background: rgba(157, 0, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .magic-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            background: #B200FF;
+            box-shadow: 0 0 15px #B200FF, 0 0 30px #9D00FF;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: magicDraw 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes magicDraw {
+            0% { width: 0; opacity: 0; }
+            50% { opacity: 1; }
+            100% { width: 100%; opacity: 1; }
+        }
+
+        .service-desc {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.4rem;
+            color: #E2CFFF;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(178, 0, 255, 0.3);
+        }
+
+        .market-coverage {
+            font-size: 0.9rem;
+            color: #A38CBE;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* ==========================================================================
+           2.0 功能模块: FREE PICK & FACEBOOK VIDEO (适配暗紫主题)
+           ========================================================================== */
+        .free-pick-container {
+            margin: 0 auto 2rem auto;
+            width: 100%;
+            max-width: 800px;
+            text-align: left;
+        }
+        
+        .free-pick-btn {
+            background: rgba(12, 7, 20, 0.6);
+            color: #39FF14;
+            width: 100%;
+            padding: 1.2rem;
+            border: 1px solid rgba(157, 0, 255, 0.4);
+            border-radius: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            text-transform: uppercase;
+        }
+
+        .free-pick-btn:hover {
+            transform: translateY(-2px);
+            border-color: #39FF14;
+            box-shadow: 0 10px 20px rgba(57, 255, 20, 0.2);
+            color: #FFF;
+        }
+
+        .free-pick-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: rgba(9, 5, 14, 0.85);
+            border-radius: 0 0 12px 12px;
+            margin-top: -5px;
+            position: relative;
+            z-index: -1;
+            padding: 0 1.5rem;
+            opacity: 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .free-pick-content.active {
+            padding: 1.5rem;
+            opacity: 1;
+            border: 1px dashed rgba(157, 0, 255, 0.4);
+            border-top: none;
+            z-index: 1;
+            margin-top: 0;
+        }
+
+        .match-details {
+            padding: 1.2rem 0;
+            border-bottom: 1px dashed rgba(157, 0, 255, 0.2);
+            color: #A38CBE;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .match-details:last-child { border-bottom: none; padding-bottom: 0; }
+        .match-details span { color: #E2CFFF; font-weight: 600; }
+
+        .choose-weapon {
+            margin: 2rem auto 4rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 450px;
+        }
+
+        .choose-weapon a {
+            background: rgba(12, 7, 20, 0.6);
+            padding: 1rem 3.5rem;
+            border-radius: 40px;
+            border: 1px solid rgba(157, 0, 255, 0.4);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            width: 100%;
+        }
+        
+        .choose-weapon a:hover {
+            border-color: #B200FF;
+            box-shadow: 0 0 20px rgba(178, 0, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .choose-weapon span {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #FFFFFF;
+            text-shadow: 0 0 10px rgba(157, 0, 255, 0.6);
+            text-transform: uppercase;
+        }
+
+        .fb-subtext {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem; 
+            color: #A38CBE; 
+            margin-top: 6px; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ==========================================================================
+           SPARKLE CARDS (Glassmorphism & Neon Glow)
+           ========================================================================== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            align-items: stretch;
+            text-align: left;
+            position: relative;
+        }
+
+        .card {
+            background: rgba(12, 7, 20, 0.3);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            border-radius: 16px;
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 2;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(9, 5, 14, 0.9), 0 0 40px rgba(178, 0, 255, 0.5), inset 0 0 20px rgba(157, 0, 255, 0.2);
+            border-color: #B200FF;
+            background: rgba(18, 10, 30, 0.5);
+        }
+
+        .card::before, .card::after {
+            content: '✦'; position: absolute; color: #E2CFFF;
+            text-shadow: 0 0 15px #B200FF, 0 0 30px #FFFFFF; opacity: 0;
+            pointer-events: none; transition: opacity 0.3s ease; z-index: -1;
+        }
+
+        .card:hover::before {
+            opacity: 1; top: -15px; right: -10px; font-size: 1.5rem;
+            animation: starPulse 1s infinite alternate, floatStar 2s infinite ease-in-out;
+        }
+
+        .card:hover::after {
+            opacity: 1; bottom: 10%; left: -15px; font-size: 2rem;
+            animation: starPulse 1.2s infinite alternate-reverse, floatStar 2.5s infinite ease-in-out;
+        }
+
+        .magic-star-3 {
+            position: absolute; top: 40%; right: -20px; color: #E2CFFF; font-size: 1.2rem;
+            text-shadow: 0 0 15px #B200FF; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .card:hover .magic-star-3 {
+            opacity: 1; animation: starPulse 0.9s infinite alternate, floatStar 1.8s infinite ease-in-out;
+        }
+
+        @keyframes starPulse {
+            0% { transform: scale(0.8) rotate(0deg); filter: brightness(1); }
+            100% { transform: scale(1.3) rotate(15deg); filter: brightness(1.5); }
+        }
+        @keyframes floatStar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 2.0 内部细节设计适配暗紫主题 */
+        .medal-icon { font-size: 2.2rem; margin-bottom: 0.5rem; line-height: 1; text-align: center; }
+        
+        .card-title {
+            font-family: 'Rajdhani', sans-serif; font-size: 1.6rem; font-weight: 700;
+            color: #FFFFFF; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 5px; text-shadow: 0 0 10px rgba(157, 0, 255, 0.4);
+            text-align: center;
+        }
+
+        .card-price {
+            font-family: 'Teko', sans-serif; font-size: 3.5rem; font-weight: 700;
+            color: #FFFFFF; line-height: 1; margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(157, 0, 255, 0.6); text-align: center;
+        }
+        
+        .price-small { font-size: 1.2rem; font-family: 'Montserrat', sans-serif; font-weight: 600; color: #A38CBE; }
+
+        .tagline { text-align: center; font-size: 0.85rem; color: #A38CBE; margin-bottom: 15px; font-style: italic; }
+
+        .match-of-the-day {
+            background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(157, 0, 255, 0.2);
+            padding: 12px; border-radius: 8px; text-align: center; font-size: 0.85rem;
+            font-weight: 700; color: #E2CFFF; margin: 0 0 15px 0; width: 100%;
+            letter-spacing: 0.5px; line-height: 1.4; box-shadow: inset 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .match-of-the-day span { color: #FFFFFF; display: block; }
+        .match-vs { 
+            color: #39FF14; font-size: 0.75rem; margin: 0 6px; font-style: italic; 
+            background: rgba(57, 255, 20, 0.1); padding: 2px 6px; border-radius: 4px; 
+        }
+
+        .feature-list { list-style: none; margin: 0 0 20px 0; flex-grow: 1; text-align: left; }
+        .feature-list li { 
+            font-size: 0.85rem; padding: 6px 0; display: flex; align-items: center; gap: 8px; 
+            color: #C1A6E5; border-bottom: 1px solid rgba(157, 0, 255, 0.1); line-height: 1.4;
+        }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-list i { color: #39FF14; width: 18px; font-size: 0.9rem; text-align: center; }
+
+        .auto-delivery { color: #39FF14; font-size: 0.85rem; font-weight: 600; text-align: left; margin-bottom: 1.2rem; }
+
+        .badge-save {
+            background: rgba(178, 0, 255, 0.2); color: #E2CFFF; font-weight: 700;
+            font-size: 0.75rem; padding: 4px 12px; border-radius: 30px; display: inline-block;
+            margin: -5px auto 15px auto; border: 1px solid rgba(178, 0, 255, 0.5);
+            letter-spacing: 1px; text-transform: uppercase; text-align: center;
+        }
+
+        /* ELITE CARD */
+        .card.elite {
+            border: 2px solid #9D00FF; background: rgba(20, 9, 35, 0.4);
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.2), inset 0 0 30px rgba(157, 0, 255, 0.1);
+            transform: scale(1.04); z-index: 3;
+        }
+        .card.elite:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 20px 50px rgba(9, 5, 14, 0.9), 0 0 60px rgba(178, 0, 255, 0.6), inset 0 0 40px rgba(157, 0, 255, 0.3);
+        }
+
+        .tag-best-value {
+            position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+            background: #B200FF; padding: 4px 18px; border-radius: 4px;
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.9rem;
+            letter-spacing: 1px; white-space: nowrap; color: #FFFFFF; text-transform: uppercase;
+            box-shadow: 0 0 15px #9D00FF, 0 0 30px #B200FF; border: 1px dashed rgba(255, 255, 255, 0.6);
+            animation: tagFlash 2s infinite alternate; z-index: 4;
+        }
+        @keyframes tagFlash {
+            0% { box-shadow: 0 0 15px #9D00FF, 0 0 30px #B200FF; }
+            100% { box-shadow: 0 0 25px #B200FF, 0 0 50px #D480FF; filter: brightness(1.2); }
+        }
+
+        /* ==========================================================================
+           CTA BUTTONS (NEON GREEN MAGICAL ENERGY FILL)
+           ========================================================================== */
+        .buy-btn {
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            width: 100%; padding: 14px 0; text-align: center; background: transparent;
+            border: 2px solid #39FF14; border-radius: 6px; color: #39FF14;
+            font-family: 'Montserrat', sans-serif; font-size: 1.05rem; font-weight: 800;
+            text-transform: uppercase; text-decoration: none; letter-spacing: 1px;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: auto; position: relative; overflow: hidden; z-index: 1;
+        }
+        .buy-btn i { font-size: 1rem; }
+
+        .buy-btn::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: #39FF14; z-index: -1; transform: scaleY(0); transform-origin: bottom;
+            transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .buy-btn:hover::before { transform: scaleY(1); }
+        .buy-btn:hover {
+            color: #09050E; box-shadow: 0 0 20px rgba(57, 255, 20, 0.8), 0 0 40px rgba(57, 255, 20, 0.5);
+            transform: translateY(4px) scale(0.98); border-color: #39FF14;
+        }
+
+        /* ==========================================================================
+           FOOTER WARNING
+           ========================================================================== */
+        .footer-warning {
+            margin-top: 60px; font-size: 0.85rem; color: #5C4A73;
+            font-weight: 600; letter-spacing: 1px;
+        }
+
+        @media (max-width: 1024px) {
+            .card.elite { transform: scale(1); }
+            .card.elite:hover { transform: translateY(-8px) scale(1); }
+            .outmost-wrapper { padding: 40px 15px; }
+            .brand-title { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <canvas id="magicCanvas"></canvas>
+
+    <div class="shooting-star star-1"></div>
+    <div class="shooting-star star-2"></div>
+    <div class="shooting-star star-3"></div>
+
+    <div class="outmost-wrapper">
+        
+        <!-- 👉【改LOGO】把下面 src="" 里的链接换成你自己的Logo图片链接 -->
+        <img class="brand-logo" alt="Logo" src="【这里请粘贴你那一长串超长乱码】">
+
+        <h1 class="brand-title">MARK YAY</h1>
+
+        <!-- 👉【改WhatsApp号码】修改 wa.me/ 后面的数字，换成你自己的WhatsApp号码（不要空格） -->
+        <a href="https://wa.me/12089189160" target="_blank" class="support-link">Any questions or need a specific match? Contact me. Same price.</a>
+        
+        <div class="magic-divider"></div>
+        
+        <p class="service-desc">
+            Detailed Match Picks & Correct Score Predictions<br>
+            <span style="font-size:1.1rem; color:#A38CBE; font-family:'Montserrat', sans-serif;">(TOP 5 EUROPEAN LEAGUES, World Cup, Euros, NationsLeague, Friendlies)</span>
+        </p>
+        <p class="market-coverage">
+            COMPREHENSIVE MARKET COVERAGE<br>
+            Both 1X2 and AsianHandicap Markets Included
+        </p>
+
+        <div class="free-pick-container">
+            <button class="free-pick-btn" onclick="toggleFreePick()">
+                <i class="fas fa-gift" style="font-size: 1.2rem;"></i> TAP TO VIEW TODAY'S FREE PICK
+            </button>
+    
+            <div class="free-pick-content" id="freePickContent">
+                <!-- 👉【改今日免费推荐1】修改下面 <span> 里的 队名、盘口、比分 等内容 -->
+                <div class="match-details">
+                    <div>Match: <span>Wolves vs. Tottenham Hotspur (English Premier League)</span></div>
+                    <div>Asian Handicap: <span>Tottenham -0.75 (Live Odds: 1.9 - 1.95)</span></div>
+                    <div>Over/Under: <span>Over 2.75 Goals (Live Odds: 1.87 - 1.97)</span></div>
+                    <div>1X2 (Match Winner): <span>Away Win (Live Odds: 1.72 - 2.2)</span></div>
+                    <div>Recommended Score: <span>1-3, 1-2</span></div>
+                </div>
+                <!-- 👉【改今日免费推荐2】修改下面 <span> 里的 队名、盘口、比分 等内容 -->
+                <div class="match-details">
+                    <div>Match: <span>Real Madrid vs. Barcelona (La Liga)</span></div>
+                    <div>Asian Handicap: <span>Real Madrid -0.25 (Live Odds: 1.85 - 2.05)</span></div>
+                    <div>Over/Under: <span>Over 2.5 Goals (Live Odds: 1.75 - 2.10)</span></div>
+                    <div>1X2 (Match Winner): <span>Home Win (Live Odds: 2.15 - 3.4)</span></div>
+                    <div>Recommended Score: <span>2-1, 3-1</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="choose-weapon">
+            <!-- 👉【改Facebook链接】修改下面 href="" 里的网址为你的Facebook视频链接，同时可以改 <span> 里的文字 -->
+            <a href="https://www.facebook.com/" target="_blank">
+                <span>FACEBOOK TODAY VIDEO</span>
+                <!-- 👉【改Facebook副文字】修改下面引号里的文字，比如“点赞、评论、收藏” -->
+                <div class="fb-subtext">Like、Comment、Save</div>
+            </a>
+        </div>
+
+        <div class="pricing-grid">
+            
+            <!-- 套餐1：Single Match -->
+            <div class="card">
+                <span class="magic-star-3">✧</span>
+                <div class="medal-icon">🥉</div>
+                <div class="card-title">Single Match</div>
+                
+                <!-- 👉【改价格】修改下面 $8.90 为你的价格 -->
+                <div class="card-price">$8.90 <span class="price-small">USD</span></div>
+               
+                <div class="tagline"><i class="fas fa-droplet"></i> Test the waters</div>
+
+                <div class="match-of-the-day">
+                    <!-- 👉【改示例对阵1】把 TEAM A 和 TEAM B 换成实际队名 -->
+                    <span>
+                        TEAM A<i class="match-vs">VS</i>
+                        TEAM B</span>
+                </div>
+
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Full blueprint analysis</li>
+                    <li><i class="fas fa-check-circle"></i> Asian Handicap + 1X2 + O/U</li>
+                    <li><i class="fas fa-check-circle"></i> 2 correct score predictions</li>
+                    <li><i class="fas fa-check-circle"></i> In-depth single match breakdown</li>
+                </ul>
+                
+                <div class="auto-delivery">Auto-delivery after payment</div>
+
+                <!-- 👉【改购买链接1】如需更换Whop购买链接，修改下方 href="" 里的网址 -->
+                <a href="https://whop.com/checkout/plan_XMQgNNBnYTKpL" class="buy-btn">
+                    <i class="fas fa-link"></i> Get Access <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- 套餐2：Daily Double Flod -->
+            <div class="card">
+                <span class="magic-star-3">✧</span>
+                <div class="medal-icon">🥈</div>
+                <div class="card-title">Daily Double Flod</div>
+                
+                <!-- 👉【改价格】修改下面 $13.90 为你的价格 -->
+                <div class="card-price">$13.90 <span class="price-small">USD</span></div>
+
+                <div class="tagline"><i class="fas fa-fire"></i> High returns</div>
+
+                <div class="match-of-the-day">
+                    <!-- 👉【改示例对阵2】把 TEAM A/B/C/D 换成实际队名 -->
+                    <span>
+                        TEAM A<i class="match-vs">VS</i>
+                        TEAM B</span>
+                    <div style="height: 1px; background: rgba(157, 0, 255, 0.2); margin: 6px 0;"></div>
+                    <span>
+                        TEAM C<i class="match-vs">VS</i>
+                        TEAM D</span>
+                </div>
+
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Daily double fold</li>
+                    <li><i class="fas fa-check-circle"></i> Full data backing</li>
+                    <li><i class="fas fa-check-circle"></i> Asian Handicap + O/U combo</li>
+                    <li><i class="fas fa-check-circle"></i> High-return model</li>
+                </ul>
+                
+                <div class="auto-delivery">Auto-delivery after payment</div>
+
+                <!-- 👉【改购买链接2】如需更换Whop购买链接，修改下方 href="" 里的网址 -->
+                <a href="https://whop.com/checkout/plan_bzECRJUDsSrpR" class="buy-btn">
+                    <i class="fas fa-link"></i> Get Access <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- 套餐3：Weekly VIP -->
+            <div class="card">
+                <span class="magic-star-3">✧</span>
+                <div class="medal-icon">🥇</div>
+                <div class="card-title">Weekly VIP</div>
+                
+                <!-- 👉【改价格】修改下面 $59.90 为你的价格 -->
+                <div class="card-price">$59.90 <span class="price-small">USD</span></div>
+                
+                <div style="text-align: center;"><div class="badge-save"><i class="fas fa-gem"></i> 15 Picks + 1 Bonus Fold</div></div>
+                
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> 15 selected picks</li>
+                    <li><i class="fas fa-check-circle"></i> 1 bonus fold</li>
+                    <li><i class="fas fa-check-circle"></i> Daily updates & instant alerts</li>
+                    <li><i class="fas fa-check-circle"></i> Best value pick</li>
+                </ul>
+                
+                <!-- 👉【改购买链接3】如需更换Whop购买链接，修改下方 href="" 里的网址 -->
+                <a href="https://whop.com/checkout/plan_HTEysUnbcSxeM" class="buy-btn">
+                    <i class="fas fa-link"></i> Get Access <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- 套餐4：Monthly Elite -->
+            <div class="card elite">
+                <span class="magic-star-3">✧</span>
+                <div class="tag-best-value">🔥 Best Value - Save $60!</div>
+                <div class="medal-icon">💎</div>
+                
+                <div class="card-title">Monthly Elite</div>
+                
+                <!-- 👉【改价格】修改下面 $179.90 为你的价格 -->
+                <div class="card-price">$179.90 <span class="price-small">USD</span></div>
+                
+                <div style="text-align: center;">
+                    <div class="badge-save" style="color: #39FF14; border-color: rgba(57, 255, 20, 0.4); background: rgba(57, 255, 20, 0.1);">
+                        <i class="fas fa-piggy-bank"></i> $2.25 per match
+                    </div>
+                </div>
+                
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle" style="color: #39FF14;"></i> 80+ picks</li>
+                    <li><i class="fas fa-check-circle" style="color: #39FF14;"></i> 8 exclusive folds</li>
+                    <li><i class="fas fa-check-circle" style="color: #39FF14;"></i> Staking strategy included</li>
+                    <li><i class="fas fa-check-circle" style="color: #39FF14;"></i> Elite tier – maximum value</li>
+                </ul>
+                
+                <!-- 👉【改购买链接4】如需更换Whop购买链接，修改下方 href="" 里的网址 -->
+                <a href="https://whop.com/checkout/plan_ckx1ti3yTknre" class="buy-btn">
+                    <i class="fas fa-link"></i> Get Access <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="footer-warning">
+            ⚠️ 18+ | No Refunds
+        </div>
+
+    </div>
+
+    <script>
+        // ========== 1. 2.0 Free Pick Accordion 功能 ==========
+        function toggleFreePick() {
+            var content = document.getElementById("freePickContent");
+            content.classList.toggle("active");
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + 50 + "px";
+            }
+        }
+
+        // ========== 2. 代码原版进步001 魔法数据点与火花特效 ==========
+        const canvas = document.getElementById('magicCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let dataPoints = [];
+        let sparks = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        // Rising Data Point (Matrix style but floating up)
+        class DataPoint {
+            constructor() {
+                this.reset(true);
+            }
+            reset(randomY = false) {
+                this.x = Math.random() * width;
+                this.y = randomY ? Math.random() * height : height + 20;
+                this.speed = Math.random() * 0.8 + 0.2;
+                // Binary or hex chars
+                const chars = "01010101789ABCDEF";
+                this.char = chars[Math.floor(Math.random() * chars.length)];
+                this.alpha = Math.random() * 0.3 + 0.05;
+                this.fontSize = Math.floor(Math.random() * 12 + 8);
+            }
+            update() {
+                this.y -= this.speed;
+                if (this.y < -50) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(157, 0, 255, ${this.alpha})`;
+                ctx.font = `${this.fontSize}px 'Rajdhani', monospace`;
+                ctx.fillText(this.char, this.x, this.y);
+            }
+        }
+
+        // Purple Sparkburst
+        class Spark {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.speedY = (Math.random() - 0.5) * 2;
+                this.life = 1;
+                this.decay = Math.random() * 0.02 + 0.01;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= this.decay;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(178, 0, 255, ${this.life})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            resize();
+            dataPoints = Array.from({ length: 80 }, () => new DataPoint());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw Data Points
+            dataPoints.forEach(dp => {
+                dp.update();
+                dp.draw();
+            });
+            
+            // Randomly create sparks
+            if (Math.random() < 0.05) {
+                const sx = Math.random() * width;
+                const sy = Math.random() * height;
+                for(let i=0; i<5; i++) sparks.push(new Spark(sx, sy));
+            }
+
+            // Update and draw sparks
+            for (let i = sparks.length - 1; i >= 0; i--) {
+                sparks[i].update();
+                sparks[i].draw();
+                if (sparks[i].life <= 0) {
+                    sparks.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
+    </script>
+</body>
+</html>
